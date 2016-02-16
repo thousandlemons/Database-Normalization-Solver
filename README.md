@@ -1,10 +1,11 @@
-# Normalization Solver
-
 #### <i><a href="https://raw.githubusercontent.com/nathanielove/Normalization-Solver/master/%5BGUI%5D%20Normalization%20Solver.jar">Download</a> an executable JAR app with GUI</i>
 
 If the link above doesn't work, please download the jar file named as ```[GUI] Normalization Solver.jar``` from the root folder of this project.
 
 ![Screenshot](screenshot.png)
+
+#### *Download the package [`DatabaseNormalizationSolver-1.0.jar`](https://github.com/nathanielove/Database-Normalization-Solver/blob/master/DatabaseNormalizationSolver-1.0.jar?raw=true) to use this library.* 
+
 
 ## Introduction
 This is a open souce library together with an app with GUI to solve database normalization related problems, including:
