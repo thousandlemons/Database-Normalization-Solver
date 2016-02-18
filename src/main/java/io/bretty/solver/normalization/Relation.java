@@ -23,8 +23,8 @@ public final class Relation {
 	 * @param fds a set of FD's
 	 */
 	public Relation(Set<Attribute> attrs, Set<FuncDep> fds) {
-		this.attrs = new HashSet<Attribute>(attrs);
-		this.fds = new HashSet<FuncDep>(fds);
+		this.attrs = new HashSet<>(attrs);
+		this.fds = new HashSet<>(fds);
 	}
 	
 	/**
