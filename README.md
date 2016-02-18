@@ -1,13 +1,29 @@
+## [EXTRA] Java GUI App
+
 #### <i><a href="https://raw.githubusercontent.com/nathanielove/Normalization-Solver/master/%5BGUI%5D%20Normalization%20Solver.jar">Download</a> an executable JAR app with GUI</i>
 
 If the link above doesn't work, please download the jar file named as ```[GUI] Normalization Solver.jar``` from the root folder of this project.
 
 ![Screenshot](screenshot.png)
 
-#### *Download the package [`DatabaseNormalizationSolver-1.0.jar`](https://github.com/nathanielove/Database-Normalization-Solver/blob/master/DatabaseNormalizationSolver-1.0.jar?raw=true) to use this library.* 
+## Installation
 
+### Maven
 
-## Introduction
+```xml
+<dependency>
+  <groupId>io.bretty</groupId>
+  <artifactId>database-normalization-solver</artifactId>
+  <version>1.0</version>
+</dependency>
+```
+
+### Downloads
+
+* Download package [`database-normalization-solver-1.0.jar`](https://github.com/nathanielove/Database-Normalization-Solver/blob/master/database-normalization-solver-1.0.jar?raw=true)
+* Download package, source and javadoc from: [Artifect Directory on Maven Central Repository](https://repo1.maven.org/maven2/io/bretty/database-normalization-solver/1.0/)
+
+## Library Introduction
 This is a open souce library together with an app with GUI to solve database normalization related problems, including:
   <ul>
   <li>Compute <b>closure</b></li>
@@ -101,6 +117,19 @@ Algos.removeTrivial(fds);
 
 Please note that some methods perform operations on the original set(s) in the parameter, while others will return the results in a different set, without modifying the original sets.
 
+Here is a complete list of what the static methods in the `Algos` class can do:
+
+* Compute closure
+* Combine the right hand side of a set of functional dependencies
+* Check if two sets of functional dependencies are equivalent
+* Compute the minimun basis of a set of functional dependencies
+* Compute superkeys and keys for a given set of attributes together with a set of functional dependencies
+* Compute the projection of a set of functional dependencies on a set of attributes
+* Remove redundent functional dependencies from a set
+* Compute the functional dependencies that violate 3NF
+* Compute the functional dependencies that violate BCNF
+* Compute which functional dependencies are lost during a forced decomposition to BCNF or 3NF
+
 ### Decompose to BCNF or 3NF
 
 One of the most powerful and convenient functionality of this library is to directly decompose a relation into BCNF or 3NF.
@@ -127,6 +156,3 @@ Set<FuncDep> lost = Algos.checkLossyDecomposition(rel.getAttributes(), rel.getFu
 
 All the lost functional dependencies will be stored in ```lost```. If ```lost``` is empty, it means all functional dependencies are preserved after the decomposition.
 
-## More Resources
-- The generated javadoc html files are in the ```/doc``` folder.
-- There are also a lot of examples in the ```Demo``` class.

@@ -49,19 +49,19 @@ public final class Relation {
 
 	/**
 	 * Decompose the current relation into a set of relations that satisfy 3NF, 
-	 * by using the Lossless Join & Dependency Preservation algorithm
+	 * by using the Lossless Join &amp; Dependency Preservation algorithm
 	 * @return a set of decomposed relations
 	 */
 	public Set<Relation> decomposeTo3NF(){
-		Set<Relation> result = new HashSet<Relation>();
+		Set<Relation> result = new HashSet<>();
 		Set<FuncDep> mb = Algos.minimalBasis(this.fds);
 		for(FuncDep fd : mb){
-			Set<Attribute> attrsNow = new HashSet<Attribute>(fd.getLeft());
+			Set<Attribute> attrsNow = new HashSet<>(fd.getLeft());
 			attrsNow.addAll(fd.getRight());
 			Set<FuncDep> proj = Algos.projection(attrsNow, mb);
 			result.add(new Relation(attrsNow, proj));
 		}
-		Set<Relation> toRemove = new HashSet<Relation>();
+		Set<Relation> toRemove = new HashSet<>();
 		for(Relation a : result){
 			for(Relation b : result){
 				if(a != b && a.attrs.containsAll(b.attrs)){
@@ -101,7 +101,7 @@ public final class Relation {
 	 * @return a set of decomposed relations
 	 */
 	public Set<Relation> decomposeToBCNF(){
-		Set<Relation> result = new HashSet<Relation>();
+		Set<Relation> result = new HashSet<>();
 		
 		//check if it's already in BCNF
 		Set<FuncDep> violating = this.getFdsViolatingBCNF();
@@ -118,7 +118,7 @@ public final class Relation {
 		}
 		Set<Attribute> lefts = pick.getLeft();
 		Set<Attribute> attrs1 = Algos.closure(lefts, this.fds);
-		Set<Attribute> attrs2 = new HashSet<Attribute>(this.attrs);
+		Set<Attribute> attrs2 = new HashSet<>(this.attrs);
 		attrs2.removeAll(attrs1);
 		attrs2.addAll(lefts);
 		Set<FuncDep> fds1 = Algos.projection(attrs1, this.fds);
@@ -168,7 +168,7 @@ public final class Relation {
 	 * @return a set of {@code Attribute} objects that appear in this relations
 	 */
 	public Set<Attribute> getAttributes(){
-		return new HashSet<Attribute>(this.attrs);
+		return new HashSet<>(this.attrs);
 	}
 	
 	/**
@@ -192,7 +192,7 @@ public final class Relation {
 	 * @return a set of {@code FuncDep} objects that involved in this relation
 	 */
 	public Set<FuncDep> getFuncDeps(){
-		return new HashSet<FuncDep>(this.fds);
+		return new HashSet<>(this.fds);
 	}
 	
 	/**

@@ -27,12 +27,12 @@ public class Algos {
 	 */
 	public static Set<FuncDep> check3NF(Set<Attribute> attrs, Set<FuncDep> fds){
 		Set<Set<Attribute>> keys = keys(attrs, fds);
-		Set<Attribute> primes = new HashSet<Attribute>();
+		Set<Attribute> primes = new HashSet<>();
 		for(Set<Attribute> k : keys){
 			primes.addAll(k);
 		}
 		
-		Set<FuncDep> violating = new HashSet<FuncDep>();
+		Set<FuncDep> violating = new HashSet<>();
 		for(FuncDep fd : fds){
 			if(!primes.containsAll(fd.getRight())){
 				boolean contains = false;
@@ -59,7 +59,7 @@ public class Algos {
 	 */
 	public static Set<FuncDep> checkBCNF(Set<Attribute> attrs, Set<FuncDep> fds){
 		Set<Set<Attribute>> keys = keys(attrs, fds);
-		Set<FuncDep> violating = new HashSet<FuncDep>();
+		Set<FuncDep> violating = new HashSet<>();
 		for(FuncDep fd : fds){
 			boolean contains = false;
 			for(Set<Attribute> k : keys){
@@ -83,8 +83,8 @@ public class Algos {
 	 * @return the set of FD's that will be lost if this decomposition is performed
 	 */
 	public static Set<FuncDep> checkLossyDecomposition(Set<Attribute> attrs, Set<FuncDep> fds, Set<Set<Attribute>> subattrs){
-		Set<FuncDep> lost = new HashSet<FuncDep>();
-		Set<FuncDep> decomposed = new HashSet<FuncDep>();
+		Set<FuncDep> lost = new HashSet<>();
+		Set<FuncDep> decomposed = new HashSet<>();
 		for(Set<Attribute> sa : subattrs){
 			decomposed.addAll(projection(sa, fds));
 		}
@@ -105,7 +105,7 @@ public class Algos {
 	 * @return a set of attributes, i.e. the closure
 	 */
 	public static Set<Attribute> closure(Set<Attribute> attrs, Set<FuncDep> fds){
-		Set<Attribute> result = new HashSet<Attribute>(attrs);
+		Set<Attribute> result = new HashSet<>(attrs);
 		
 		boolean found = true;
 		while(found){
@@ -126,7 +126,7 @@ public class Algos {
 	 * @param fds a set of FD's
 	 */
 	public static void combineRight(Set<FuncDep> fds){
-		Map<Set<Attribute>, Set<Attribute>> map = new HashMap<Set<Attribute>, Set<Attribute>>();
+		Map<Set<Attribute>, Set<Attribute>> map = new HashMap<>();
 		for(FuncDep fd : fds){
 			//Set<Attribute> left = fd.getLeft();
 			if(map.containsKey(fd.left)){
@@ -150,7 +150,7 @@ public class Algos {
 	 * @return {@code true} if they are equivalent
 	 */
 	public static boolean equivalent(Set<FuncDep> a, Set<FuncDep> b){
-		Set<Attribute> names = new HashSet<Attribute>();
+		Set<Attribute> names = new HashSet<>();
 		for(FuncDep fd : a){
 			names.addAll(fd.getLeft());
 			names.addAll(fd.getRight());
@@ -179,10 +179,10 @@ public class Algos {
 	 */
 	public static Set<Set<Attribute>> keys(Set<Attribute> attrs, Set<FuncDep> fds){
 		Set<Set<Attribute>> superkeys = superKeys(attrs, fds);
-		Set<Set<Attribute>> toRemove = new HashSet<Set<Attribute>>();
+		Set<Set<Attribute>> toRemove = new HashSet<>();
 		for(Set<Attribute> key : superkeys){
 			for(Attribute a : key){
-				Set<Attribute> remaining = new HashSet<Attribute>(key);
+				Set<Attribute> remaining = new HashSet<>(key);
 				remaining.remove(a);
 				if(superkeys.contains(remaining)){
 					toRemove.add(key);
@@ -202,7 +202,7 @@ public class Algos {
 	 */
 	public static Set<FuncDep> minimalBasis(Set<FuncDep> fds){
 		
-		Set<FuncDep> result = new HashSet<FuncDep>(fds);
+		Set<FuncDep> result = new HashSet<>(fds);
 		
 		//Step 1: split right sides
 		splitRight(result);
@@ -222,19 +222,20 @@ public class Algos {
 	/**
 	 * Generate the power set, with the empty set.
 	 * @param originalSet the original set
-	 * @return the power set
+	 * @param <T> any class
+     * @return the power set
 	 */
 	public static <T> Set<Set<T>> powerSet(Set<T> originalSet) {
-	    Set<Set<T>> sets = new HashSet<Set<T>>();
+	    Set<Set<T>> sets = new HashSet<>();
 	    if (originalSet.isEmpty()) {
 	    	sets.add(new HashSet<T>());
 	    	return sets;
 	    }
-	    List<T> list = new ArrayList<T>(originalSet);
+	    List<T> list = new ArrayList<>(originalSet);
 	    T head = list.get(0);
-	    Set<T> rest = new HashSet<T>(list.subList(1, list.size())); 
+	    Set<T> rest = new HashSet<>(list.subList(1, list.size()));
 	    for (Set<T> set : powerSet(rest)) {
-	    	Set<T> newSet = new HashSet<T>();
+	    	Set<T> newSet = new HashSet<>();
 	    	newSet.add(head);
 	    	newSet.addAll(set);
 	    	sets.add(newSet);
@@ -251,18 +252,18 @@ public class Algos {
 	 * @return a set of FD's as the projection
 	 */
 	public static Set<FuncDep> projection(Set<Attribute> attrs, Set<FuncDep> fds){
-		Set<Attribute> appeared = new HashSet<Attribute>();
+		Set<Attribute> appeared = new HashSet<>();
 		for(FuncDep fd : fds){
 			appeared.addAll(fd.getLeft());
 			appeared.addAll(fd.getRight());
 		}
 		if(attrs.containsAll(appeared)){
-			return new HashSet<FuncDep>(fds);
+			return new HashSet<>(fds);
 		}
-		Set<Attribute> notin = new HashSet<Attribute>(appeared);
+		Set<Attribute> notin = new HashSet<>(appeared);
 		notin.removeAll(attrs);
 		Set<Set<Attribute>> powerset = reducedPowerSet(attrs);
-		Set<FuncDep> result = new HashSet<FuncDep>();
+		Set<FuncDep> result = new HashSet<>();
 		for(Set<Attribute> sa : powerset){
 			Set<Attribute> closure = closure(sa, fds);
 			closure.removeAll(notin);
@@ -277,7 +278,8 @@ public class Algos {
 	/**
 	 * Generate the power set (i.e. set of all the subsets)  of a generic set, but without the empty set.
 	 * @param originalSet the original set
-	 * @return the reduced power set
+	 * @param <T> any class
+     * @return the reduced power set
 	 */
 	public static <T> Set<Set<T>> reducedPowerSet(Set<T> originalSet){
 		Set<Set<T>> result = powerSet(originalSet);
@@ -290,14 +292,14 @@ public class Algos {
 	 * @param fds a set of FD's
 	 */
 	public static void removeTrivial(Set<FuncDep> fds){
-		Set<FuncDep> toRemove = new HashSet<FuncDep>();
-		Set<FuncDep> toAdd = new HashSet<FuncDep>();
+		Set<FuncDep> toRemove = new HashSet<>();
+		Set<FuncDep> toAdd = new HashSet<>();
 		for(FuncDep fd : fds){
 			if(fd.left.containsAll(fd.right)){
 				toRemove.add(fd);
 			}
 			else{
-				Set<Attribute> toRemoveFromRight = new HashSet<Attribute>();
+				Set<Attribute> toRemoveFromRight = new HashSet<>();
 				for(Attribute a : fd.right){
 					if(fd.left.contains(a)){
 						toRemoveFromRight.add(a);
@@ -326,7 +328,7 @@ public class Algos {
 			FuncDep toRemove = null;
 			boolean found = false;
 			for(FuncDep fd : fds){
-				Set<FuncDep> remaining = new HashSet<FuncDep>(fds);
+				Set<FuncDep> remaining = new HashSet<>(fds);
 				remaining.remove(fd);
 				if(equivalent(remaining, fds)){
 					++count;
@@ -364,9 +366,9 @@ public class Algos {
 				Set<Attribute> right = fd.getRight();
 				if(left.size() > 1){
 					for (Attribute a : left) {
-						Set<Attribute> remaining = new HashSet<Attribute>(left);
+						Set<Attribute> remaining = new HashSet<>(left);
 						remaining.remove(a);
-						Set<FuncDep> alternative = new HashSet<FuncDep>(fds);
+						Set<FuncDep> alternative = new HashSet<>(fds);
 						alternative.remove(fd);
 						toAdd = new FuncDep.Builder().left(remaining).right(right).build();
 						alternative.add(toAdd);
@@ -400,8 +402,8 @@ public class Algos {
 	 * @param fds a set of FD's
 	 */
 	public static void splitRight(Set<FuncDep> fds){
-		Set<FuncDep> toRemove = new HashSet<FuncDep>();
-		Set<FuncDep> toAdd = new HashSet<FuncDep>();
+		Set<FuncDep> toRemove = new HashSet<>();
+		Set<FuncDep> toAdd = new HashSet<>();
 		for(FuncDep fd : fds){
 			//Set<Attribute> right = fd.getRight();
 			if(fd.right.size() > 1){
@@ -423,7 +425,7 @@ public class Algos {
 	 * @return a set of superkeys, and each "superkey" is itself a set of attributes 
 	 */
 	public static Set<Set<Attribute>> superKeys(Set<Attribute> attrs, Set<FuncDep> fds){
-		Set<Set<Attribute>> keys = new HashSet<Set<Attribute>>();
+		Set<Set<Attribute>> keys = new HashSet<>();
 		if(attrs.isEmpty()){
 			for(FuncDep fd : fds){
 				attrs.addAll(fd.left);

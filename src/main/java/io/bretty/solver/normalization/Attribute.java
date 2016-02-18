@@ -24,7 +24,7 @@ public final class Attribute {
 	 */
 	public static Set<Attribute> getSet(String names){
 		if(names.equals("")){
-			return new HashSet<Attribute>();
+			return new HashSet<>();
 		}
 		names = names.replaceAll("\\s+","");
 		return getSet(names.split(","));
@@ -36,7 +36,7 @@ public final class Attribute {
 	 * @return a set of attributes
 	 */
 	public static Set<Attribute> getSet(String[] names){
-		Set<Attribute> attrs = new HashSet<Attribute>();
+		Set<Attribute> attrs = new HashSet<>();
 		for(String s : names){
 			attrs.add(Attribute.of(s));
 		}

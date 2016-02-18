@@ -31,8 +31,8 @@ public final class FuncDep {
 		 * The default constructor
 		 */
 		public Builder(){
-			this.left = new HashSet<Attribute>();
-			this.right = new HashSet<Attribute>();
+			this.left = new HashSet<>();
+			this.right = new HashSet<>();
 		}
 		
 		/**
@@ -46,7 +46,7 @@ public final class FuncDep {
 		/**
 		 * Add {@code Attribute} objects to the left of the FD
 		 * @param as one or more {@code Attribute} objects
-		 * @return
+		 * @return this builder
 		 */
 		public Builder left(Attribute... as){
 			this.left.addAll(Arrays.asList(as));
@@ -56,7 +56,7 @@ public final class FuncDep {
 		/**
 		 * Add {@code Attribute} objects to the left of the FD
 		 * @param as a set of {@code Attribute} objects
-		 * @return
+		 * @return this builder
 		 */
 		public Builder left(Set<Attribute> as){
 			this.left.addAll(as);
@@ -66,7 +66,7 @@ public final class FuncDep {
 		/**
 		 * Add {@code Attribute} objects to the right of the FD
 		 * @param as one or more {@code Attribute} objects
-		 * @return
+		 * @return this builder
 		 */
 		public Builder right(Attribute... as){
 			this.right.addAll(Arrays.asList(as));
@@ -76,7 +76,7 @@ public final class FuncDep {
 		/**
 		 * Add {@code Attribute} objects to the right of the FD
 		 * @param as a set of {@code Attribute} objects
-		 * @return
+		 * @return this builder
 		 */
 		public Builder right(Set<Attribute> as){
 			this.right.addAll(as);
@@ -86,12 +86,12 @@ public final class FuncDep {
 	}
 	/**
 	 * Get a set of {@code FuncDep} objects with only one string
-	 * @param exprs a formatted string as the following example: "a, b --> c; d --> e,f" (white spaces are optional)
+	 * @param exprs a formatted string as the following example: "a, b --&gt; c; d --&gt; e,f" (white spaces are optional)
 	 * @return a set of {@code FuncDep} objects
 	 */
 	public static Set<FuncDep> getSet(String exprs){
 		if(exprs.equals("")){
-			return new HashSet<FuncDep>();
+			return new HashSet<>();
 		}
 		exprs = exprs.replaceAll("\\s+","");
 		return getSet(exprs.split(";"));
@@ -99,11 +99,11 @@ public final class FuncDep {
 	
 	/**
 	 * Get a set of {@code FuncDep} objects with only one string array
-	 * @param exprs each element in this array is formatted as the following example: "a, b --> c, d"
+	 * @param exprs each element in this array is formatted as the following example: "a, b --&gt; c, d"
 	 * @return a set of {@code FuncDep} objects
 	 */
 	public static Set<FuncDep> getSet(String[] exprs){
-		Set<FuncDep> fds = new HashSet<FuncDep>();
+		Set<FuncDep> fds = new HashSet<>();
 		for(String s : exprs){
 			fds.add(FuncDep.of(s));
 		}
@@ -112,7 +112,7 @@ public final class FuncDep {
 	
 	/**
 	 * Quickly construct a {@code FuncDep} object with a formatted string
-	 * @param expr a formatted string as the following example: "a, b --> c, d"
+	 * @param expr a formatted string as the following example: "a, b --&gt; c, d"
 	 * (white spaces are optional)
 	 * @return a {@code FuncDep} object
 	 */
@@ -152,8 +152,8 @@ public final class FuncDep {
 	 * @param right a set of {@code Attribute} objects to be placed on the right of the FD
 	 */
 	public FuncDep(Set<Attribute> left, Set<Attribute> right){
-		this.left = new HashSet<Attribute>(left);
-		this.right = new HashSet<Attribute>(right);
+		this.left = new HashSet<>(left);
+		this.right = new HashSet<>(right);
 	}
 	
 	/**
@@ -176,15 +176,14 @@ public final class FuncDep {
 	 * @return the set of {@code Attribute} objects that appear in the left part of this FD
 	 */
 	public Set<Attribute> getLeft(){
-		return new HashSet<Attribute>(this.left);
+		return new HashSet<>(this.left);
 	}
 	
 	/**
-	 * the set of {@code Attribute} objects that appear in the right part of this FD
-	 * @return
+	 * @return the set of {@code Attribute} objects that appear in the right part of this FD
 	 */
 	public Set<Attribute> getRight(){
-		return new HashSet<Attribute>(this.right);
+		return new HashSet<>(this.right);
 	}
 	
 	@Override

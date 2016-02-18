@@ -232,8 +232,7 @@ public class Demo {
 	}
 
 	public static void main(String[] args){
-		Set<Set<Attribute>> keys = Algos.keys(new HashSet<Attribute>(), FuncDep.getSet("A-->B,C; C,D-->E; E-->A; B-->D"));
-		System.out.println(Attribute.getSet("").isEmpty());
+
 	}
 
 }
