@@ -6,7 +6,7 @@ If the link above doesn't work, please download the jar file named as ```[GUI] N
 
 ![Screenshot](screenshot.png)
 
-## Installation
+## Library Installation
 
 ### Maven
 
@@ -23,7 +23,7 @@ If the link above doesn't work, please download the jar file named as ```[GUI] N
 * Download package [`database-normalization-solver-1.0.jar`](https://github.com/nathanielove/Database-Normalization-Solver/blob/master/database-normalization-solver-1.0.jar?raw=true)
 * Download package, source and javadoc from: [Artifect Directory on Maven Central Repository](https://repo1.maven.org/maven2/io/bretty/database-normalization-solver/1.0/)
 
-## Library Introduction
+## Introduction
 This is a open souce library together with an app with GUI to solve database normalization related problems, including:
   <ul>
   <li>Compute <b>closure</b></li>
